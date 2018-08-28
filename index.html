@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Colour Game</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="colour.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
+    <body>
+        <!-- This app was built as an exercise for the Udemy course 'The Web Developer Bootcamp'. For more information see: https://www.udemy.com/the-web-developer-bootcamp/learn/v4/overview -->
+
+        <!-- Header -->
+        <h1>The great
+        <br>
+        <span id="colourDisplay">RGB(0, 0, 0)</span>
+        <br>
+        colour game</h1>
+
+        <!-- Navigation bar -->
+        <div id="navbar">
+            <!-- Button to restart game with new colours -->
+            <button id="buttonReset">New colours</button>
+
+            <!-- Message to indicate correct or incorrect choice -->
+            <span id="message"></span>
+
+            <!-- Buttons to select game difficulty -->
+            <button id="buttonEasy">Easy</button>
+            <button id="buttonHard" class="selected">Hard</button>
+        </div>
+
+        <!-- Colour squares -->
+        <div id="container">
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+        </div>
+
+        <script src="colour.js"></script>
+    </body>
+</html>

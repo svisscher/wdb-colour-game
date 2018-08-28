@@ -1,20 +1,36 @@
 // This app was built as an exercise for the Udemy course 'The Web Developer Bootcamp'. For more information see: https://www.udemy.com/the-web-developer-bootcamp/learn/v4/overview
 
-// General
+// Variables
+var colours = [];
+var colourSet;
 var gameMode = 6;
-var colours = generateRandomColours(gameMode);
+var buttonReset = document.querySelector('#buttonReset');
+var buttonsMode = document.querySelectorAll('.mode');
+var colourDisplay = document.querySelector('#colourDisplay');
 var header = document.querySelector('h1');
+var messageDisplay = document.querySelector('#message');
+var squares = document.querySelectorAll('.square');
+
+// Functions
+/**
+ * Access and return random colour from the 'colours' array.
+ * @return {number} Number that denotes position of item in 'colours' array.
+ */
+function assignColour() {
+    var randomNumber = Math.floor(Math.random() * colours.length);
+    return colours[randomNumber];
+}
 
 /**
- * Produce an RGB colour using randomized values from 0-255 for red, green
- * and blue.
- * @return {string}
+ * Change the background colour of each square to the colour passed as
+ * an argument.
+ * @param {string} colour The RGB colour that was set to be guessed by
+ * the player.
  */
-function randomColour() {
-    var red = Math.floor(Math.random() * 256);
-    var green = Math.floor(Math.random() * 256);
-    var blue = Math.floor(Math.random() * 256);
-    return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+function changeColours(colour) {
+    squares.forEach(function(square) {
+        square.style.backgroundColor = colour;
+    });
 }
 
 /**
@@ -78,27 +94,17 @@ function init() {
     resetGame();
 }
 
-init();
-
-// Header
-var colourSet = assignColour();
-var colourDisplay = document.querySelector('#colourDisplay');
-var messageDisplay = document.querySelector('#message');
-
-colourDisplay.textContent = colourSet;
-
 /**
- * Access and return random colour from the 'colours' array.
- * @return {number} Number that denotes position of item in 'colours' array.
+ * Produce an RGB colour using randomized values from 0-255 for red, green
+ * and blue.
+ * @return {string}
  */
-function assignColour() {
-    var randomNumber = Math.floor(Math.random() * colours.length);
-    return colours[randomNumber];
+function randomColour() {
+    var red = Math.floor(Math.random() * 256);
+    var green = Math.floor(Math.random() * 256);
+    var blue = Math.floor(Math.random() * 256);
+    return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 }
-
-// Navbar
-var buttonsMode = document.querySelectorAll('.mode');
-var buttonReset = document.querySelector('#buttonReset');
 
 /**
  * Reset the game by updating the colours to play with and changing the display
@@ -131,17 +137,4 @@ buttonReset.addEventListener('click', function() {
     resetGame();
 });
 
-// Main content
-var squares = document.querySelectorAll('.square');
-
-/**
- * Change the background colour of each square to the colour passed as
- * an argument.
- * @param {string} colour The RGB colour that was set to be guessed by
- * the player.
- */
-function changeColours(colour) {
-    squares.forEach(function(square) {
-        square.style.backgroundColor = colour;
-    });
-}
+init();

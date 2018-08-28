@@ -33,6 +33,53 @@ function generateRandomColours(number) {
     return arrayColours;
 }
 
+/**
+ * Run initial game functionality on page load. Add event listeners on
+ * the game mode buttons, add event listeners to the squares and run
+ * the reset game functionality to bring the page to its initial state.
+ */
+function init() {
+    // By placing buttons for game mode in For-loop code is no longer
+    // duplicated and it becomes easier to add another game mode later on
+    for (var i = 0; i < buttonsMode.length; i++) {
+        buttonsMode[i].addEventListener('click', function() {
+            buttonsMode[0].classList.remove('selected');
+            buttonsMode[1].classList.remove('selected');
+            this.classList.add('selected');
+            // Change number of squares according to game mode
+            if (this.textContent === 'Easy') {
+                gameMode = 3;
+            } else {
+                gameMode = 6;
+            }
+            resetGame();
+        });
+    }
+    for (var i = 0; i < squares.length; i++) {
+        // Add click listeners to squares
+        squares[i].addEventListener('click', function() {
+        // Store colour of clicked square
+        var colourClicked = this.style.backgroundColor;
+        // Compare clicked colour with set colour
+        if (colourClicked === colourSet) {
+            messageDisplay.textContent = 'Correct!';
+            // Call function to change colour of all squares to clicked colour
+            changeColours(colourClicked);
+            // Update header colour to clicked colour
+            header.style.backgroundColor = colourClicked;
+            // Change reset button text
+            buttonReset.textContent = 'Play again?';
+            } else {
+                this.style.backgroundColor = '#232323';
+                messageDisplay.textContent = 'Try again!';
+            }
+        });
+    }
+    resetGame();
+}
+
+init();
+
 // Header
 var colourSet = assignColour();
 var colourDisplay = document.querySelector('#colourDisplay');
@@ -80,23 +127,6 @@ function resetGame() {
     messageDisplay.textContent = '';
 }
 
-// By placing buttons for game mode in For-loop code is no longer duplicated
-// and it becomes easier to add another game mode later on
-for (var i = 0; i < buttonsMode.length; i++) {
-    buttonsMode[i].addEventListener('click', function() {
-        buttonsMode[0].classList.remove('selected');
-        buttonsMode[1].classList.remove('selected');
-        this.classList.add('selected');
-        // Change number of squares according to game mode
-        if (this.textContent === 'Easy') {
-            gameMode = 3;
-        } else {
-            gameMode = 6;
-        }
-        resetGame();
-    });
-}
-
 buttonReset.addEventListener('click', function() {
     resetGame();
 });
@@ -113,28 +143,5 @@ var squares = document.querySelectorAll('.square');
 function changeColours(colour) {
     squares.forEach(function(square) {
         square.style.backgroundColor = colour;
-    });
-}
-
-for (var i = 0; i < squares.length; i++) {
-    // Add initial colours to squares
-    squares[i].style.backgroundColor = colours[i];
-    // Add click listeners to squares
-    squares[i].addEventListener('click', function() {
-    // Store colour of clicked square
-    var colourClicked = this.style.backgroundColor;
-    // Compare clicked colour with set colour
-    if (colourClicked === colourSet) {
-        messageDisplay.textContent = 'Correct!';
-        // Call function to change colour of all squares to clicked colour
-        changeColours(colourClicked);
-        // Update header colour to clicked colour
-        header.style.backgroundColor = colourClicked;
-        // Change reset button text
-        buttonReset.textContent = 'Play again?';
-        } else {
-            this.style.backgroundColor = '#232323';
-            messageDisplay.textContent = 'Try again!';
-        }
     });
 }

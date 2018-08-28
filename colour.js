@@ -4,11 +4,11 @@ var colours = generateRandomColours(gameMode);
 var header = document.querySelector('h1');
 
 /**
- * Function description.
- * @return {string} Description.
+ * Produce an RGB colour using randomized values from 0-255 for red, green
+ * and blue.
+ * @return {string}
  */
 function randomColour() {
-    // Choose random value for red then green then blue from 0-255
     var red = Math.floor(Math.random() * 256);
     var green = Math.floor(Math.random() * 256);
     var blue = Math.floor(Math.random() * 256);
@@ -16,9 +16,10 @@ function randomColour() {
 }
 
 /**
- * Function description.
- * @param {number} number Description.
- * @return {number} Description.
+ * Generate an array with a number of random RGB colours.
+ * @param {number} number The number of colours passed into the function.
+ * The number depends on the gameMode; easy = 3, hard = 6 (default).
+ * @return {Array}
  */
 function generateRandomColours(number) {
     var arrayColours = [];
@@ -27,7 +28,6 @@ function generateRandomColours(number) {
         // Get random colour and push into array
         arrayColours.push(randomColour());
     }
-    // Return array
     return arrayColours;
 }
 
@@ -39,12 +39,11 @@ var messageDisplay = document.querySelector('#message');
 colourDisplay.textContent = colourSet;
 
 /**
- * Function description.
- * @return {number} Description.
+ * Access and return random colour from the 'colours' array.
+ * @return {number} Number that denotes position of item in 'colours' array.
  */
 function assignColour() {
     var randomNumber = Math.floor(Math.random() * colours.length);
-    // Use number to access and return colour out of array
     return colours[randomNumber];
 }
 
@@ -54,12 +53,12 @@ var buttonHard = document.querySelector('#buttonHard');
 var buttonReset = document.querySelector('#buttonReset');
 
 /**
- * Function description.
+ * Reset the game by updating the colours to play with.
  */
 function resetGame() {
     // Generate new colours
     colours = generateRandomColours(gameMode);
-    // Pick new random colour from array
+    // Select new random colour from array
     colourSet = assignColour();
     // Update display to match set colour
     colourDisplay.textContent = colourSet;
@@ -122,11 +121,12 @@ buttonReset.addEventListener('click', function() {
 var squares = document.querySelectorAll('.square');
 
 /**
- * Function description.
- * @param {string} colour Description.
+ * Change the background colour of each square to the colour passed as
+ * an argument.
+ * @param {string} colour The RGB colour that was set to be guessed by
+ * the player.
  */
 function changeColours(colour) {
-    // Change colour of each square to colour passed as argument
     squares.forEach(function(square) {
         square.style.backgroundColor = colour;
     });

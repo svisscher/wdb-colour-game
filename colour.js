@@ -50,12 +50,12 @@ function assignColour() {
 }
 
 // Navbar
-var buttonEasy = document.querySelector('#buttonEasy');
-var buttonHard = document.querySelector('#buttonHard');
+var buttonsMode = document.querySelectorAll('.mode');
 var buttonReset = document.querySelector('#buttonReset');
 
 /**
- * Reset the game by updating the colours to play with.
+ * Reset the game by updating the colours to play with and changing the display
+ * features accordingly.
  */
 function resetGame() {
     // Generate new colours
@@ -66,7 +66,12 @@ function resetGame() {
     colourDisplay.textContent = colourSet;
     // Change colours of squares
     for (var i = 0; i < squares.length; i++) {
-        squares[i].style.backgroundColor = colours[i];
+        if (colours[i]) {
+            squares[i].style.display = 'block';
+            squares[i].style.backgroundColor = colours[i];
+        } else {
+            squares[i].style.display = 'none';
+        }
     }
     // Reset header background
     header.style.backgroundColor = '#747475';
@@ -75,45 +80,22 @@ function resetGame() {
     messageDisplay.textContent = '';
 }
 
-buttonEasy.addEventListener('click', function() {
-    // Show button as selected
-    buttonEasy.classList.add('selected');
-    buttonHard.classList.remove('selected');
-    // Reset message text
-    messageDisplay.textContent = '';
-    header.style.backgroundColor = '#747475';
-    // Set game mode to easy
-    gameMode = 3;
-    // Generate new colours depending on game mode
-    colours = generateRandomColours(gameMode);
-    // Choose and set new colour
-    colourSet = assignColour();
-    colourDisplay.textContent = colourSet;
-    for (var i = 0; i < squares.length; i++) {
-        // If there is next colour, loop through colours array and check if
-        // square has colour assigned, then change it
-        if (colours[i]) {
-            squares[i].style.backgroundColor = colours[i];
+// By placing buttons for game mode in For-loop code is no longer duplicated
+// and it becomes easier to add another game mode later on
+for (var i = 0; i < buttonsMode.length; i++) {
+    buttonsMode[i].addEventListener('click', function() {
+        buttonsMode[0].classList.remove('selected');
+        buttonsMode[1].classList.remove('selected');
+        this.classList.add('selected');
+        // Change number of squares according to game mode
+        if (this.textContent === 'Easy') {
+            gameMode = 3;
         } else {
-            squares[i].style.display = 'none';
+            gameMode = 6;
         }
-    }
-});
-
-buttonHard.addEventListener('click', function() {
-    buttonHard.classList.add('selected');
-    buttonEasy.classList.remove('selected');
-    messageDisplay.textContent = '';
-    header.style.backgroundColor = '#747475';
-    gameMode = 6;
-    colours = generateRandomColours(gameMode);
-    colourSet = assignColour();
-    colourDisplay.textContent = colourSet;
-    for (var i = 0; i < squares.length; i++) {
-        colours[i] = squares[i].style.backgroundColor = colours[i];
-        squares[i].style.display = 'block';
-    }
-});
+        resetGame();
+    });
+}
 
 buttonReset.addEventListener('click', function() {
     resetGame();

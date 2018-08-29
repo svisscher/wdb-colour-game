@@ -17,7 +17,7 @@ const squares = document.querySelectorAll('.square');
  * @return {number} Number that denotes position of item in 'colours' array.
  */
 function assignColour() {
-    let randomNumber = Math.floor(Math.random() * colours.length);
+    const randomNumber = Math.floor(Math.random() * colours.length);
     return colours[randomNumber];
 }
 
@@ -66,9 +66,9 @@ function init() {
  * @return {string}
  */
 function randomColour() {
-    let red = Math.floor(Math.random() * 256);
-    let green = Math.floor(Math.random() * 256);
-    let blue = Math.floor(Math.random() * 256);
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
     return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 }
 
@@ -134,7 +134,7 @@ function setupSquares() {
         // Add click listeners to squares
         squares[i].addEventListener('click', function() {
         // Store colour of clicked square
-        let colourClicked = this.style.backgroundColor;
+        const colourClicked = this.style.backgroundColor;
         // Compare clicked colour with set colour
         if (colourClicked === colourSet) {
             messageDisplay.textContent = 'Correct!';

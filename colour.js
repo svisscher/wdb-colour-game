@@ -34,6 +34,18 @@ function changeColours(colour) {
 }
 
 /**
+ * Produce an RGB colour using randomized values from 0-255 for red, green
+ * and blue.
+ * @return {string}
+ */
+function randomColour() {
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+}
+
+/**
  * Generate an array with a number of random RGB colours.
  * @param {number} number The number of colours passed into the function.
  * The number depends on the gameMode; easy = 3, hard = 6 (default).
@@ -47,29 +59,6 @@ function generateRandomColours(number) {
         arrayColours.push(randomColour());
     }
     return arrayColours;
-}
-
-/**
- * Run initial game functionality on page load. Add event listeners on
- * the game mode buttons, add event listeners to the squares and run
- * the reset game functionality to bring the page to its initial state.
- */
-function init() {
-    setupModeButtons();
-    setupSquares();
-    resetGame();
-}
-
-/**
- * Produce an RGB colour using randomized values from 0-255 for red, green
- * and blue.
- * @return {string}
- */
-function randomColour() {
-    const red = Math.floor(Math.random() * 256);
-    const green = Math.floor(Math.random() * 256);
-    const blue = Math.floor(Math.random() * 256);
-    return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 }
 
 /**
@@ -98,10 +87,6 @@ function resetGame() {
     buttonReset.textContent = 'New colours';
     messageDisplay.textContent = '';
 }
-
-buttonReset.addEventListener('click', function() {
-    resetGame();
-});
 
 /**
  * Add events listeners to the Easy and Hard game mode buttons.
@@ -152,4 +137,19 @@ function setupSquares() {
     }
 }
 
+/**
+ * Run initial game functionality on page load. Add event listeners on
+ * the game mode buttons, add event listeners to the squares and run
+ * the reset game functionality to bring the page to its initial state.
+ */
+function init() {
+    setupModeButtons();
+    setupSquares();
+    resetGame();
+}
+
 init();
+
+buttonReset.addEventListener('click', function() {
+    resetGame();
+});

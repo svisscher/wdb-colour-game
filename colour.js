@@ -55,42 +55,8 @@ function generateRandomColours(number) {
  * the reset game functionality to bring the page to its initial state.
  */
 function init() {
-    // By placing buttons for game mode in For-loop code is no longer
-    // duplicated and it becomes easier to add another game mode later on
-    for (var i = 0; i < buttonsMode.length; i++) {
-        buttonsMode[i].addEventListener('click', function() {
-            buttonsMode[0].classList.remove('selected');
-            buttonsMode[1].classList.remove('selected');
-            this.classList.add('selected');
-            // Change number of squares according to game mode
-            if (this.textContent === 'Easy') {
-                gameMode = 3;
-            } else {
-                gameMode = 6;
-            }
-            resetGame();
-        });
-    }
-    for (var i = 0; i < squares.length; i++) {
-        // Add click listeners to squares
-        squares[i].addEventListener('click', function() {
-        // Store colour of clicked square
-        var colourClicked = this.style.backgroundColor;
-        // Compare clicked colour with set colour
-        if (colourClicked === colourSet) {
-            messageDisplay.textContent = 'Correct!';
-            // Call function to change colour of all squares to clicked colour
-            changeColours(colourClicked);
-            // Update header colour to clicked colour
-            header.style.backgroundColor = colourClicked;
-            // Change reset button text
-            buttonReset.textContent = 'Play again?';
-            } else {
-                this.style.backgroundColor = '#232323';
-                messageDisplay.textContent = 'Try again!';
-            }
-        });
-    }
+    setupModeButtons();
+    setupSquares();
     resetGame();
 }
 
@@ -136,5 +102,54 @@ function resetGame() {
 buttonReset.addEventListener('click', function() {
     resetGame();
 });
+
+/**
+ * Add events listeners to the Easy and Hard game mode buttons.
+ */
+function setupModeButtons() {
+    // By placing buttons for game mode in For-loop code is no longer
+    // duplicated and it becomes easier to add another game mode later on
+    for (var i = 0; i < buttonsMode.length; i++) {
+        buttonsMode[i].addEventListener('click', function() {
+            buttonsMode[0].classList.remove('selected');
+            buttonsMode[1].classList.remove('selected');
+            this.classList.add('selected');
+            // Change number of squares according to game mode
+            if (this.textContent === 'Easy') {
+                gameMode = 3;
+            } else {
+                gameMode = 6;
+            }
+            resetGame();
+        });
+    }
+}
+
+/**
+ * Add events listeners to the coloured squares and handle the display
+ * of the header, squares and in-game messages.
+ */
+function setupSquares() {
+    for (var i = 0; i < squares.length; i++) {
+        // Add click listeners to squares
+        squares[i].addEventListener('click', function() {
+        // Store colour of clicked square
+        var colourClicked = this.style.backgroundColor;
+        // Compare clicked colour with set colour
+        if (colourClicked === colourSet) {
+            messageDisplay.textContent = 'Correct!';
+            // Call function to change colour of all squares to clicked colour
+            changeColours(colourClicked);
+            // Update header colour to clicked colour
+            header.style.backgroundColor = colourClicked;
+            // Change reset button text
+            buttonReset.textContent = 'Play again?';
+            } else {
+                this.style.backgroundColor = '#232323';
+                messageDisplay.textContent = 'Try again!';
+            }
+        });
+    }
+}
 
 init();

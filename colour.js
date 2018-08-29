@@ -1,15 +1,15 @@
 // This app was built as an exercise for the Udemy course 'The Web Developer Bootcamp'. For more information see: https://www.udemy.com/the-web-developer-bootcamp/learn/v4/overview
 
 // Variables
-var colours = [];
-var colourSet;
-var gameMode = 6;
-var buttonReset = document.querySelector('#buttonReset');
-var buttonsMode = document.querySelectorAll('.mode');
-var colourDisplay = document.querySelector('#colourDisplay');
-var header = document.querySelector('h1');
-var messageDisplay = document.querySelector('#message');
-var squares = document.querySelectorAll('.square');
+let colours = [];
+let colourSet;
+let gameMode = 6;
+const buttonReset = document.querySelector('#buttonReset');
+const buttonsMode = document.querySelectorAll('.mode');
+const colourDisplay = document.querySelector('#colourDisplay');
+const header = document.querySelector('h1');
+const messageDisplay = document.querySelector('#message');
+const squares = document.querySelectorAll('.square');
 
 // Functions
 /**
@@ -17,7 +17,7 @@ var squares = document.querySelectorAll('.square');
  * @return {number} Number that denotes position of item in 'colours' array.
  */
 function assignColour() {
-    var randomNumber = Math.floor(Math.random() * colours.length);
+    const randomNumber = Math.floor(Math.random() * colours.length);
     return colours[randomNumber];
 }
 
@@ -40,9 +40,9 @@ function changeColours(colour) {
  * @return {Array}
  */
 function generateRandomColours(number) {
-    var arrayColours = [];
+    const arrayColours = [];
     // Add number random colours to array and repeat number of times
-    for (var i = 0; i < number; i++) {
+    for (let i = 0; i < number; i++) {
         // Get random colour and push into array
         arrayColours.push(randomColour());
     }
@@ -66,9 +66,9 @@ function init() {
  * @return {string}
  */
 function randomColour() {
-    var red = Math.floor(Math.random() * 256);
-    var green = Math.floor(Math.random() * 256);
-    var blue = Math.floor(Math.random() * 256);
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
     return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 }
 
@@ -84,7 +84,7 @@ function resetGame() {
     // Update display to match set colour
     colourDisplay.textContent = colourSet;
     // Change colours of squares
-    for (var i = 0; i < squares.length; i++) {
+    for (let i = 0; i < squares.length; i++) {
         if (colours[i]) {
             squares[i].style.display = 'block';
             squares[i].style.backgroundColor = colours[i];
@@ -109,7 +109,7 @@ buttonReset.addEventListener('click', function() {
 function setupModeButtons() {
     // By placing buttons for game mode in For-loop code is no longer
     // duplicated and it becomes easier to add another game mode later on
-    for (var i = 0; i < buttonsMode.length; i++) {
+    for (let i = 0; i < buttonsMode.length; i++) {
         buttonsMode[i].addEventListener('click', function() {
             buttonsMode[0].classList.remove('selected');
             buttonsMode[1].classList.remove('selected');
@@ -130,11 +130,11 @@ function setupModeButtons() {
  * of the header, squares and in-game messages.
  */
 function setupSquares() {
-    for (var i = 0; i < squares.length; i++) {
+    for (let i = 0; i < squares.length; i++) {
         // Add click listeners to squares
         squares[i].addEventListener('click', function() {
         // Store colour of clicked square
-        var colourClicked = this.style.backgroundColor;
+        const colourClicked = this.style.backgroundColor;
         // Compare clicked colour with set colour
         if (colourClicked === colourSet) {
             messageDisplay.textContent = 'Correct!';

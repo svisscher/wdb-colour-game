@@ -13,4 +13,4 @@ Switch between Easy and Hard game mode, depending on the level of challenge you 
 Reset the game with new colours by clicking on 'New colours' while still playing or 'Play again?' after you have guessed the correct colour.
 
 ## Credit
-A shout-out to Colt for being an amazing instructor, guiding his students step-by-step through projects such as these in a wat that is understandable and informative. Find The Web Developer Bootcamp on Udemy: https://www.udemy.com/the-web-developer-bootcamp/.
+A shout-out to Colt for being an amazing instructor, guiding his students step-by-step through projects such as these in a way that is understandable and informative. Find The Web Developer Bootcamp on Udemy: https://www.udemy.com/the-web-developer-bootcamp/.
